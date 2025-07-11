@@ -5,7 +5,7 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: "@monthly"
+    - cron: "0 0 1 * *" # on 00:00, 01.*.*
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
