@@ -6,10 +6,10 @@ ARG extra
 RUN pacman -Syu --noconfirm
 RUN pacman -S --noconfirm --needed ${basePackages} ${extra}
 
-# Replace Distrobox's prompt with starship
-# Actually doesn't work since Distrobox's config only gets inserted during container creation
-# RUN sd '\tfunction fish_prompt\n.+\n.+\n\tend' "\tsource (starship init fish --print-full-init | psub)" /etc/fish/conf.d/distrobox_config.fish
+# Get starship's prompt instead of the distrobox one
 RUN echo "source (starship init fish --print-full-init | psub)" > /etc/fish/functions/fish_prompt.fish
+# Always delete the fish prompt function from the distrobox created config. If it doesn't exist, do nothing
+RUN echo \"sudo sd '\tfunction fish_prompt\n.+\n.+\n.+end' '' /etc/fish/conf.d/distrobox_config.fish\" > /etc/fish/conf.d/99_fuck_distrobox.fish
 
 # Install yay, disabled b/c broken makepkg
 # WORKDIR /tmp
