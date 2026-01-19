@@ -11,12 +11,15 @@ RUN echo "source (starship init fish --print-full-init | psub)" > /etc/fish/func
 # Always delete the fish prompt function from the distrobox created config. If it doesn't exist, do nothing
 RUN echo "sudo sd '\tfunction fish_prompt\n.+\n.+\n.+end' '' /etc/fish/conf.d/distrobox_config.fish" > /etc/fish/conf.d/99_fuck_distrobox.fish
 
-# Install yay, disabled b/c broken makepkg
-# WORKDIR /tmp
-# RUN <<EOF
-# runuser -u nobody -- git clone https://aur.archlinux.org/yay.git
-# cd yay 
-# runuser -u nobody -- makepkg -si --noconfirm
-# EOF
-
-# RUN yay -S --noconfirm ${basePackages} ${extra}
+# Install yay
+WORKDIR /tmp
+RUN <<EOF
+useradd -m -G wheel builder && passwd -d builder
+echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+mkdir yay-build
+chown -R builder:builder yay-build
+su - builder -c "git clone https://aur.archlinux.org/yay.git /tmp/yay-build/yay"
+su - builder -c "cd /tmp/yay-build/yay && makepkg -si --noconfirm"
+userdel builder
+rm -rf yay-build
+EOF
