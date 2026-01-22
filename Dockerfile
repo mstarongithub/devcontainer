@@ -11,6 +11,7 @@ RUN echo "source (starship init fish --print-full-init | psub)" > /etc/fish/func
 # Always delete the fish prompt function from the distrobox created config. If it doesn't exist, do nothing
 RUN echo "sudo sd '\tfunction fish_prompt\n.+\n.+\n.+end' '' /etc/fish/conf.d/distrobox_config.fish" > /etc/fish/conf.d/99_fuck_distrobox.fish
 
+RUN mkdir -p /etc/pki/ca-trust/extracted
 RUN ln -s /etc/ca-certificates/extracted /etc/pki/ca-trust/extracted/pem
 
 # Install yay
