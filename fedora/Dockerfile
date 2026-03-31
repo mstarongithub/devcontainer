@@ -1,6 +1,6 @@
 FROM quay.io/fedora/fedora-toolbox:latest
 # sd not available in either fedora nor copr
-ARG basePackages="git fish zellij bat ripgrep fd-find neovim starship thefuck eza fzf wl-clipboard tealdeer zoxide"
+ARG basePackages="git fish zellij bat ripgrep fd-find neovim starship thefuck eza fzf wl-clipboard tealdeer zoxide just"
 ARG coprs="atim/starship sramanujam/atuin varlad/zellij alternateved/eza"
 ARG extra
 

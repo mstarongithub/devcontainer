@@ -1,5 +1,5 @@
 FROM quay.io/toolbx/arch-toolbox:latest
-ARG basePackages="git base-devel fish zellij bat ripgrep fd neovim starship thefuck eza fzf sd wl-clipboard tealdeer zoxide"
+ARG basePackages="git base-devel fish zellij bat ripgrep fd neovim starship thefuck eza fzf sd wl-clipboard tealdeer zoxide just"
 ARG extra
 
 # Update packages and install base ones
