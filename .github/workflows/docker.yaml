@@ -17,7 +17,7 @@ jobs:
   build-and-push-image:
     strategy:
       matrix:
-        os: [arch, fedora]
+        os: [arch, fedora, debian]
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
